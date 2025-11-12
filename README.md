@@ -4,7 +4,12 @@
 
 
 
-This project is modified from https://github.com/rohanpsingh/LearningHumanoidWalking, and on the basis of HumanoidWalking, further provides a running pose integrated with hand movements.
+Training humanoid robots to run using reinforcement learning, modified from the work at https://github.com/rohanpsingh/LearningHumanoidWalking, with additions including: 
+1. Running using only legs
+2. Using hands for balance
+3. Running with both hands and legs simultaneously.
+
+Added 14 new arm joints, increasing the observation dimension from 37 to 65.
 
 ## Code structure:
 A rough outline for the repository that might be useful for adding your own robot:
