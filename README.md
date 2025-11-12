@@ -1,7 +1,8 @@
 # LearningHumanoidRunning
-![11月12日](https://github.com/user-attachments/assets/0cbca7ab-ade9-4e77-9b5c-9d2fafead47f)
 
-This project is modified from https://github.com/rohanpsingh/LearningHumanoidWalking
+![climb_down](https://github.com/user-attachments/assets/0cbca7ab-ade9-4e77-9b5c-9d2fafead47f)
+
+
 
 This project is modified from https://github.com/rohanpsingh/LearningHumanoidWalking, and on the basis of HumanoidWalking, further provides a running pose integrated with hand movements.
 
