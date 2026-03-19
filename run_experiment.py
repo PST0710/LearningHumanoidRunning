@@ -15,6 +15,15 @@ from rl.policies.critic import FF_V # 采用了状态值函数critic，输入为
 from rl.envs.normalize import get_normalization_params
 from rl.envs.wrappers import SymmetricEnv
 
+
+def load_checkpoint(path):
+    """兼容 PyTorch 2.6+ 的 checkpoint 加载。"""
+    try:
+        return torch.load(path, map_location="cpu", weights_only=False)
+    except TypeError:
+        # 兼容旧版 PyTorch（没有 weights_only 参数）
+        return torch.load(path, map_location="cpu")
+
 def import_env(env_name_str):
     if env_name_str=='jvrc_walk':
         from envs.jvrc import JvrcWalkEnv as Env
@@ -65,8 +74,8 @@ def run_experiment(args):
         if os.path.isdir(args.continued):
             path_to_actor = os.path.join(args.continued, "actor.pt")
         path_to_critic = path_to_actor.split('actor')[0]+'critic'+path_to_actor.split('actor')[1]
-        policy = torch.load(path_to_actor)
-        critic = torch.load(path_to_critic)
+        policy = load_checkpoint(path_to_actor)
+        critic = load_checkpoint(path_to_critic)
     else:
         policy = Gaussian_FF_Actor(obs_dim, action_dim, fixed_std=np.exp(args.std_dev), bounded=False)
         critic = FF_V(obs_dim)

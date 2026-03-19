@@ -55,9 +55,16 @@ $ python run_experiment.py train --logdir <path_to_exp_dir> --num_procs <num_of_
 ```  
 
 ```
-# 基础测试（小规模）
+# 训练指令
 python run_experiment.py train --env jvrc_run --logdir ./logs/test --num_procs 4 --n_itr 10 --seed 42
 ```
+
+```
+# 接着在旧实验/experiments/jvcr_run的基础上继续训练指令
+python run_experiment.py train --env jvrc_run --logdir ./logs/test --num_procs 4 --n_itr 10 --seed 42 --continued ./experiments/jvcr_run
+```
+
+
 
 #### **To play:**
 
