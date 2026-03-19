@@ -520,10 +520,10 @@ class PPO:
 
                 # 绘制评估曲线
                 plt.clf()
-                xlabel = [i*self.eval_freq for i in range(len(test_ep_lens))]
+                xlabel = [(i + 1) * self.eval_freq for i in range(len(test_ep_lens))]
                 plt.plot(xlabel, test_ep_lens, color='blue', marker='o', label='Ep lens')
                 plt.plot(xlabel, test_ep_returns, color='green', marker='o', label='Returns')
-                plt.xticks(np.arange(0, itr+1, step=self.eval_freq))
+                plt.xticks(np.arange(self.eval_freq, itr + 2, step=self.eval_freq))
                 plt.xlabel('Iterations')
                 plt.ylabel('Returns/Episode lengths')
                 plt.legend()
