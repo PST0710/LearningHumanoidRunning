@@ -11,7 +11,7 @@ import pickle
 from envs.jvrc import JvrcArmEnv
 from rl.algos.ppo import PPO
 from rl.policies.actor import Gaussian_FF_Actor
-from rl.policies.critic import FF_V
+from rl.policies.critic import FF_V # 采用了状态值函数critic，输入为状态，输出为状态值，而非Q值函数critic，输入为状态和动作，输出为状态动作值
 from rl.envs.normalize import get_normalization_params
 from rl.envs.wrappers import SymmetricEnv
 
