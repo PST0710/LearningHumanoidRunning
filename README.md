@@ -47,12 +47,17 @@ Environment names supported:
 | run Task (using leg and arm)    | 'jvrc_run_arm'       |
 
 
+
 #### **To train:** 
 
 ```
 $ python run_experiment.py train --logdir <path_to_exp_dir> --num_procs <num_of_cpu_procs> --env <name_of_environment>
 ```  
 
+```
+# 基础测试（小规模）
+python run_experiment.py train --env jvrc_run --logdir ./logs/test --num_procs 4 --n_itr 10 --seed 42
+```
 
 #### **To play:**
 
@@ -61,6 +66,11 @@ For example, `debug_stepper.py` can be used with the `jvrc_step` environment.
 ```
 $ PYTHONPATH=.:$PYTHONPATH python scripts/debug_stepper.py --path <path_to_exp_dir>
 ```
+
+```
+python scripts/debug_stepper.py --path experiments/jvcr_run_arm
+```
+![demo](demo.png)
 
 #### **What you should see:**
 

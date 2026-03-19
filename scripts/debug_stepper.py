@@ -1,12 +1,32 @@
 import os
 import time
 import argparse
+import sys
 import torch
 import pickle
 import mujoco
 import numpy as np
 import transforms3d as tf3
+
+# Ensure project root is on PYTHONPATH when running this script directly.
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from run_experiment import import_env
+
+
+def load_policy_checkpoint(path):
+    """Load full policy object across PyTorch versions.
+
+    PyTorch >=2.6 changed torch.load default `weights_only=True`, which breaks
+    loading pickled nn.Module objects from trusted local checkpoints.
+    """
+    try:
+        return torch.load(path, map_location="cpu", weights_only=False)
+    except TypeError:
+        # Backward compatibility for older torch versions without weights_only.
+        return torch.load(path, map_location="cpu")
 
 def print_reward(ep_rewards):
     mean_rewards = {k:[] for k in ep_rewards[-1].keys()}
@@ -125,7 +145,7 @@ def main():
     # load experiment args
     run_args = pickle.load(open(path_to_pkl, "rb"))
     # load trained policy
-    policy = torch.load(path_to_actor)
+    policy = load_policy_checkpoint(path_to_actor)
     policy.eval()
     # import the correct environment
     env = import_env(run_args.env)()
